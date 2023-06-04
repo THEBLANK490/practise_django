@@ -16,9 +16,38 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from app_accounts import views as acc_view
+from app_home import views as hom
+from app_cart import views as cart
+from app_customers import views as customer
+from app_inventory import views as inventory
 
 
 urlpatterns = [
+    # admin route
     path('admin/', admin.site.urls),
+
+    # accounts route
     path('playground/', include('playground.urls')),
+    path('accounts/login',acc_view.login, name="login"),
+    path('accounts/profile',acc_view.profile, name="profile"),
+    path('accounts/register',acc_view.register, name="register"),
+
+    # cart route
+    path('cart/cart',cart.cart,name="cart"),
+
+    # home route
+    path('home/home',hom.home,name="Home"),
+
+    # customers route
+    path("customer/create",customer.create,name="Create"),
+    path("customer/edit",customer.edit,name="Edit"),
+    path("customer/index",customer.index,name="Index"),
+    path("customer/show",customer.show,name="Show"),
+
+    # inventory routes
+    path('inventory/add',inventory.inv_add,name="Inventory-add"),
+    path('inventory/edit',inventory.inv_edit,name="Inventory-edit"),
+    path('inventory/list',inventory.inv_list,name="Inventory-list"),
+    path('inventory/show',inventory.inv_show,name="Inventory-show"),
 ]
